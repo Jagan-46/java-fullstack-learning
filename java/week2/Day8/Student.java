@@ -1,32 +1,28 @@
 import java.util.*;
-public class Student {
+class Student{
     int studentId;
     String name;
-    public Student(int studentId,String name){
+    int marks;
+    public Student(int studentId,String name,int marks){
         this.studentId=studentId;
         this.name=name;
+        this.marks=marks;
     }
-    public void getDetails(){
-        System.out.println(studentId+" "+name);
-    }
-    @Override
-    public int hashCode(){
-        return studentId;
-    }
-    @Override
-    public boolean equals(Object obj){
-        if (this ==obj) return true;
-        if(obj == null || getClass() != obj.getClass()) return false;
-        Student student = (Student) obj;
-        return studentId == student.studentId;
+    public void displayInfo(){
+        System.out.println(name+" "+marks);
     }
     public static void main(String [] args){
-        HashSet<Student> students = new HashSet<>();
-        students.add(new Student(23,"jagan"));
-        students.add(new Student (17,"Gopi"));
-        students.add(new Student(23,"jagan"));
-        for(Student student:students){
-            student.getDetails();
-        }
+     ArrayList<Student> students = new ArrayList<>();
+     students.add(new Student(23,"Jagan",96));
+     students.add(new Student (54,"Siva",98));
+     students.add(new Student(76,"Teja",78));
+     Collections.sort(students, new Comparator<Student>(){
+         public int compare(Student s1, Student s2){
+             return s2.marks - s1.marks;
+         }
+     });
+     for(Student student : students){
+         student.displayInfo();
+     }
     }
 }
