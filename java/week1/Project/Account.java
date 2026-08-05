@@ -1,11 +1,19 @@
+import java.util.*;
 public abstract class Account {
-    int accountNumber;
-    String accountHolder;
-    double balance;
+    public int accountNumber;
+    public String accountHolder;
+    public double balance;
     public abstract void deposit(double amount) throws Exception;
     public abstract void withdraw(double amount) throws Exception;
     public double getBalance(){
         return balance;
+    }
+    public int getAccountNumber(){
+        return accountNumber;
+    }
+    @Override
+    public String toString(){
+        return "Account{"+"accountNumber= "+accountNumber+", accountHolder= "+accountHolder+", balance= "+balance+" }";
     }
 }
 class SavingsAccount extends Account {
@@ -54,23 +62,75 @@ class CheckingAccount extends Account {
         }
         balance = balance - amount;
     }
-
-    public static void main(String[] args) {
-
-        SavingsAccount savingsaccount = new SavingsAccount(123456, "Jagan", 600000, 8);
-        try {
-            savingsaccount.deposit(10000);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        System.out.println(savingsaccount.getBalance());
-
-        CheckingAccount checkingaccount = new CheckingAccount(123456789, "Siva", 300000, 50000);
-        try {
-            checkingaccount.deposit(5000);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
 }
-            System.out.println(checkingaccount.getBalance());
+    class Bank {
+        ArrayList<Account> account = new ArrayList<>();
+
+        public void addAccount(Account acc) {
+            account.add(acc);
+        }
+
+        public Account findAccount(int accountNumber) {
+            for (Account acc : account) {
+                if (acc.getAccountNumber() == accountNumber) {
+                    return acc;
+                }
+            }
+            return null;
+        }
+
+        public double getBalance(int accountNumber) {
+            for (Account acc : account) {
+                if (acc.getAccountNumber() == accountNumber) {
+                    return acc.getBalance();
+                }
+            }
+            return 0;
+        }
+
+        public void deposit(int accountNumber, double amount) throws Exception {
+            for (Account acc : account) {
+                if (acc.getAccountNumber() == accountNumber) {
+                        acc.deposit(amount);
+                        return;
+                }
+            }
+        }
+
+        public void withdraw(int accountNumber, double amount) throws Exception {
+            for (Account acc : account) {
+                if (acc.getAccountNumber() == accountNumber) {
+                        acc.withdraw(amount);
+                        return;
+                }
+            }
+        }
+    public static void main(String[] args) {
+        Bank bank = new Bank();
+
+        SavingsAccount savings = new SavingsAccount(10023, "Jagan", 600000, 8);
+        SavingsAccount savings1 = new SavingsAccount(10003,"Arun",500000,2);
+        CheckingAccount checking = new CheckingAccount(10054, "Siva", 300000, 50000);
+        CheckingAccount checking1 = new CheckingAccount(1002,"Durai",100000,5000);
+         bank.addAccount(savings);
+         bank.addAccount(checking);
+         bank.addAccount(savings1);
+         bank.addAccount(checking1);
+         try {
+             bank.deposit(10023, 30000);
+             System.out.println("Transaction Successful");
+             System.out.println("Balance: "+bank.getBalance(10023));
+             bank.withdraw(10054,36000);
+             System.out.println("Transaction Successful");
+             System.out.println("Balance: "+ bank.getBalance(10054));
+         }
+         catch(Exception e){
+            System.out.println( e.getMessage());
+         }
+        System.out.println("Balance: "+bank.getBalance(10054));
+        System.out.println("Balance: "+bank.getBalance(1002));
+        System.out.println("Balance: "+bank.getBalance(10003));
+        System.out.println(bank.findAccount(10054));
+
         }
     }
