@@ -1,6 +1,3 @@
 name: Jagan age: 21 marks: 96
 name: Siva age: 23 marks: 95
 name: Raj age: 28 marks: 99
-Jagan 21 96
-Siva 23 95
-Raj 28 99

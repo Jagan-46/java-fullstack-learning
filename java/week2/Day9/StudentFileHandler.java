@@ -3,7 +3,7 @@ class StudentFileHandler{
     public void saveStudent(String fileName,String name,int age,int marks)throws IOException{
          try {
              BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true));
-             bw.write("name: " + name + " age: " + age + " marks: " + marks);
+             bw.write(name+" "+age+" "+marks);
              bw.newLine();
              bw.close();
          }
