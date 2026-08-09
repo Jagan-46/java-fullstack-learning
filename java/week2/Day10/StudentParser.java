@@ -1,11 +1,41 @@
 import java.util.*;
 public class StudentParser {
+    String email;
+    String password;
+    String name;
+
+    public StudentParser(String email,String password,String name) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+    }
+
+    public boolean validateEmail() {
+        if(email.contains("@")){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean validatePassword() {
+        if (password.length() >= 8){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean validateName() {
+        for (int i = 0; i < name.length(); i++) {
+            if (Character.isDigit(name.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
     public static void main(String [] args){
-        String student = "John,25,95";
-        String[] parts = student.split(",");
-        String name = parts[0];
-        String age = parts[1];
-        String marks = parts[2];
-        System.out.println("Name:"+name+" Age:"+age+" Marks:"+marks);
+     StudentParser emails = new StudentParser("jagan@gmail.com","abcd1234","Jagan1");
+     System.out.println("Email valid: "+emails.validateEmail());
+     System.out.println("Password Valid: "+emails.validatePassword());
+     System.out.println("Name Valid: "+emails.validateName());
     }
 }
