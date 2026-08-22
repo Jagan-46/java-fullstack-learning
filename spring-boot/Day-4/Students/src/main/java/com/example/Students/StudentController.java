@@ -21,7 +21,7 @@ public class StudentController {
         for (Student s : students) {
             if (s.getId() == id) {
                 s.setName(student.getName());
-                s.setId(student.getId());
+                s.setMarks(student.getMarks());
                 return "Updated";
             }
         }
