@@ -1,4 +1,4 @@
-package com.example.Students;
+package com.example.Student;
 import jakarta.validation.constraints.*;
 public class Student{
     private int id;

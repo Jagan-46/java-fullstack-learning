@@ -1,4 +1,4 @@
-package com.example.Students;
+package com.example.Student;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.*;
 import java.util.*;
@@ -13,7 +13,7 @@ public class StudentController {
             return "Added";
         }
         catch(Exception e){
-         return   "Error: "+e.getMessage();
+            return   "Error: "+e.getMessage();
         }
     }
 
@@ -60,7 +60,7 @@ public class StudentController {
         return result;
     }
     @GetMapping("/api/students/filter")
-    public ArrayList<Student> filterStudent(@RequestParam int minMarks,@RequestParam int maxMarks){
+    public ArrayList<Student> filterStudent(@RequestParam int minMarks, @RequestParam int maxMarks){
         ArrayList<Student> result = new ArrayList<>();
         for(Student s : students) {
             if (s.getMarks() >= minMarks && s.getMarks() <= maxMarks) {
